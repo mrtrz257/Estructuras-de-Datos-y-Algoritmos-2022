@@ -32,7 +32,12 @@ class ColaSec:
             self.__pr += 1 % self.__max
             self.__cantidad -= 1
             return x
-    #def recorrer(self):
-        #if not self.vacia():
-            
-        
+    def recorrer(self):
+        if not self.vacia():
+            i = self.__pr
+            j = 0
+            while j < self.__cantidad:
+                i = (i+1) % self.__max
+                self.__arreglo[i]
+                j+=1
+                
