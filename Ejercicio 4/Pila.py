@@ -6,10 +6,10 @@ class Pila:
     __tope1 = None
     __tope2 = None
     def __init__(self, cantidad = 0):
-        self.__arreglo = np.empty(self.__cant, dtype=int)
+        self.__arreglo = np.empty(cantidad, dtype=int)
         self.__cant = cantidad
         self.__tope1 = -1
-        self.__tope2 = cantidad+1
+        self.__tope2 = cantidad
     def vacia1(self):
         return self.__tope1==-1
     def vacia2(self):
@@ -23,23 +23,23 @@ class Pila:
             return 0
     def insertar2(self, x):
         if self.__tope2>self.__tope1+1:
-            self.__tope2 -= -1
+            self.__tope2 -= 1
             self.__arreglo[self.__tope2] = x
             return x
         else:
             return 0
     def suprimir1(self):
         if self.vacia1():
-            print("Pila Vacia")
-            return 0
+            print("Pila 1 Vacia")
+            return -1
         else:
-            self.__tope1 -= 1
             x = self.__arreglo[self.__tope1]
+            self.__tope1 -= 1
             return x
     def suprimir2(self):
         if self.vacia2():
-            print("Pila Vacia")
-            return 0
+            print("Pila 2 Vacia")
+            return -1
         else:
             x = self.__arreglo[self.__tope2]
             self.__tope2 += 1
