@@ -7,7 +7,7 @@ class ColaSec:
     __ul = 0
     __cantidad = 0
     def __init__(self, max = 0):
-        self.__arreglo = np.empty(self.__max, dtype=int)
+        self.__arreglo = np.empty(max, dtype=int)
         self.__max = max
         self.__pr = 0
         self.__ul = 0
@@ -39,6 +39,3 @@ class ColaSec:
                 if elemento != -1:
                     lista.append(elemento)
         return lista
-    def getCantidad(self):
-        return self.__cantidad
-    
