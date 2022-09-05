@@ -40,16 +40,19 @@ class ListaSec:
             return None
     def siguiente(self, posicion):
         if not self.vacia():
-            if self.recuperar[posicion]!=None:
-                return self.__arreglo[posicion+1]
-            ######        
-
-    def anterior(self):
-        pass
-        ######
-
-    def recorrer(self):
+            if self.recuperar[posicion+1]!=None:
+                return self.recuperar[posicion+1]
+            else:
+                print("No se encontro elemento")
+        else:
+            print("Lista Vacia")
+    def anterior(self, posicion):
         if not self.vacia():
-            for i in range(self.__cantidad):
-                elemento = self.recuperar(i)
-                print(elemento)
+            if self.recuperar[posicion-1]!=None:
+                return self.recuperar[posicion-1]
+            else:
+                print("No se encontro elemento")
+        else:
+            print("Lista Vacia")
+
+        
