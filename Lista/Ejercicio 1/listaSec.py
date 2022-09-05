@@ -20,11 +20,13 @@ class ListaSec:
             else:
                 pass
                 ######
+
     def suprimir(self, posicion):
         if posicion == self.__ultimo:
             self.__ultimo -= 1
         del self.__arreglo[posicion]
         ######
+
     def recuperar(self, posicion):
         if not self.vacia():
             return self.__arreglo[posicion]
@@ -54,5 +56,9 @@ class ListaSec:
                 print("No se encontro elemento")
         else:
             print("Lista Vacia")
-
-        
+    def recorrer(self):
+        if not self.vacia():
+            for i in range(self.__cantidad):
+                elemento = self.recuperar(i)
+                print(elemento)
+    
