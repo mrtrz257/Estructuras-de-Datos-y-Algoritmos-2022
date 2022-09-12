@@ -5,11 +5,11 @@ class Pila:
     __cant = 0
     __tope = 0
     def __init__(self, cantidad = 0):
-        self.__arreglo = np.empty(self.__cant, dtype=int)
+        self.__arreglo = np.empty(cantidad, dtype=int)
         self.__cant = cantidad
         self.__tope = -1
     def vacia(self):
-        return self.__tope==-1
+        return self.__tope == -1
     def insertar(self, x):
         if self.__tope<self.__cant-1:
             self.__tope += 1
@@ -22,13 +22,15 @@ class Pila:
             print("Pila Vacia")
             return 0
         else:
-            self.__tope -= 1
             x = self.__arreglo[self.__tope]
-            np.delete(self.__arreglo, self.__tope)
+            self.__tope -= 1
             return x
     def mostrar(self):
         if not self.vacia():
-            for i in range(self.__tope):
+            i = 0
+            tope = self.__tope
+            while i <= tope:
                 elemento = self.suprimir()
-                if elemento != 0:
+                if elemento >= -1:
                     print(elemento)
+                i += 1
