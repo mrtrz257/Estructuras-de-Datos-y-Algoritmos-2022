@@ -31,7 +31,34 @@ class arbolBB:
             else:
                 print("ERROR")
     def suprimir(self, x):
-        pass
+        if not self.vacio():
+            nodo = self.posicion(x)[0]
+            if nodo.getItem() == x:
+                aux = nodo.obtenerIzquierdo()
+                if aux != None:
+                    while aux.obtenerDerecho() != None:
+                        aux = aux.obtenerDerecho()
+                    camino = self.camino(x, aux.getItem())
+                    padre = self.posicion(camino[len(camino) - 2])[0]
+                    if self.__raiz.getItem() == x:
+                        self.__raiz.cargarItem(aux.getItem())
+                    else:
+                        nodo.cargarItem(aux.getItem())
+                    izq = padre.obtenerIzquierdo()
+                    if izq.getItem() == aux.getItem():
+                        padre.cargarIzquierdo(None)
+                    else:
+                        padre.cargarDerecho(None)
+                else:
+                    camino = self.camino(self.__raiz.getItem(), x)
+                    padre = self.posicion(camino[len(camino) - 2])[0]
+                    izq = padre.obtenerIzquierdo()
+                    if izq.getItem() == x:
+                        padre.cargarIzquierdo(None)
+                    else:
+                        padre.cargarDerecho(None)
+            else:
+                print("ERROR")
     def buscar(self, x):
         band = False
         elemento = self.posicion(x)[0]
@@ -84,7 +111,39 @@ class arbolBB:
             print("ERROR")
         return band
     def camino(self, x, z):
-        pass
+        lista = []
+        nodo1 = self.posicion(x)[0]
+        if nodo1.getItem() == x:
+            nodo2 = self.posicion(z)[0]
+            if nodo2.getItem() == z:
+                band = False
+                while not band:
+                    dato1 = nodo1.getItem()
+                    dato2 = nodo2.getItem()
+                    if dato1 == dato2:
+                        lista.append(dato1)
+                        band = True
+                    elif dato1 > dato2:
+                        if nodo1.obtenerIzquierdo() == None:
+                            band = True
+                            lista = []
+                        else:
+                            lista.append(dato1)
+                            nodo1 = nodo1.obtenerIzquierdo()
+                    else:
+                        if nodo1.obtenerDerecho() == None:
+                            band = True
+                            lista = []
+                        else:
+                            lista.append(dato1)
+                            nodo1 = nodo1.obtenerDerecho()
+            else:
+                print("ERROR")
+        else:
+            print("ERROR")
+        if (lista == []):
+            print("ERROR")
+        return lista
     def altura(self):
         if self.vacio():
             print("Arbol Vacio")
