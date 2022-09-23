@@ -2,8 +2,10 @@ from nodo import nodo
 
 class arbolBB:
     __raiz = None
+    __altura = None
     def __init__(self):
         self.__raiz = None
+        self.__altura = 0
     def vacio(self):
         return self.__raiz == None
     def obtenerRaiz(self):
@@ -14,45 +16,122 @@ class arbolBB:
         if self.vacio():
             self.__raiz = nodo(x)
         else:
-            print(x)
-            if self.__raiz.getItem()==x:
-                print("Elemento ya Existe")
+            aux = self.posicion(x)
+            if aux != None:
+                celda = nodo(x)
+                clave = aux[0].getItem()
+                if clave > x:
+                    if aux[1]+1 > self.__altura:
+                        self.__altura = aux[1]+1
+                    aux[0].cargarIzquierdo(celda)
+                elif clave < x:
+                    if aux[1]+1 > self.__altura:
+                        self.__altura = aux[1]+1
+                    aux[0].cargarDerecho(celda)
             else:
-                if self.__raiz.getItem() > x:
-                    return self.insertar(self.__raiz.obtenerIzquierdo())
-                else:
-                    return self.insertar(self.__raiz.obtenerDerecho())
+                print("ERROR")
     def suprimir(self, x):
         pass
     def buscar(self, x):
-        if self.vacio():
-            print("Elemento Inexistente")
-        else:
-            if self.__raiz.getItem()==x:
-                return self.__raiz.getItem()
-            else:
-                if self.__raiz.getItem()<x:
-                    return self.buscar(self.__raiz.obtenerIzquierdo())
-                else:
-                    return self.buscar(self.__raiz.obtenerDerecho())
+        band = False
+        elemento = self.posicion(x)[0]
+        if elemento.getItem()==x:
+            band = True
+        return band
     def nivel(self, x):
-        pass
+        niv = 0
+        elemento = self.posicion(x)
+        if elemento[0].getItem()==x:
+            niv = elemento[1]
+        else:
+            print("ERROR")
+        return niv
     def hoja(self, x):
-        pass
+        band = False
+        elemento = self.posicion(x)[0]
+        if elemento.getItem()==x and elemento.obtenerIzquierdo() == None and elemento.obtenerDerecho()==None:
+            band = True
+        else:
+            if elemento.getItem() != x:
+                print("ERROR")
+        return band
     def hijo(self, x, z):
-        pass
-    def padre(self, x, z):
-        pass
+        band = False
+        celda = self.posicion(z)[0]
+        if celda.getItem()==z:
+            izq = celda.obtenerIzquierdo()
+            if izq != None and izq.getItem()==x:
+                band = True
+            else:
+                der = celda.obtenerDerecho()
+                if der != None and der.getItem()==x:
+                    band = True
+        else:
+            print("ERROR")
+        return band
+    def padre(self, z, x):
+        band = False
+        celda = self.posicion(z)[0]
+        if celda.getItem() == z:
+            izq = celda.obtenerIzquierdo()
+            if izq != None and izq.getItem() == x:
+                band = True
+            else:
+                der = celda.obtenerDerecho()
+                if der != None and der.getItem() == x:
+                    band = True
+        else:
+            print("ERROR")
+        return band
     def camino(self, x, z):
         pass
     def altura(self):
-        pass
+        if self.vacio():
+            print("Arbol Vacio")
+        else:
+            return self.__altura
     def InOrden(self):
-        if not self.vacio():
-            self.InOrden()
-
-
+        self.recursiva(self.__raiz.obtenerIzquierdo())
+        print(self.__raiz.getItem())
+        self.recursiva(self.__raiz.obtenerDerecho())
     def PrePorden(self):
-        pass
+        print(self.__raiz.getItem())
+        self.recursiva(self.__raiz.obtenerIzquierdo())
+        self.recursiva(self.__raiz.obtenerDerecho())
     def PostOrden(self):
-        pass
+        self.recursiva(self.__raiz.obtenerIzquierdo())
+        self.recursiva(self.__raiz.obtenerDerecho())
+        print(self.__raiz.getItem())
+    def recursiva(self, nodo):
+        if (nodo != None):
+            self.recursiva(nodo.obtenerIzquierdo())
+            print(nodo.getItem())
+            self.recursiva(nodo.obtenerDerecho())
+    def posicion(self, x, niv=0):
+        if not self.vacio():
+            posicion = [None, None]
+            if self.__raiz.getItem()==x:
+                posicion[0] = self.__raiz
+                posicion[1] = niv
+            else:
+                aux = self.__raiz
+                band = True
+                while band:
+                    clave = aux.getItem()
+                    if clave == x:
+                        band = False
+                    elif clave > x:
+                        if aux.obtenerIzquierdo()==None:
+                            band = False
+                        else:
+                            niv += 1
+                            aux = aux.obtenerIzquierdo()
+                    else:
+                        if aux.obtenerDerecho()==None:
+                            band = False
+                        else:
+                            niv += 1
+                            aux = aux.obtenerDerecho()
+                posicion[0]=aux
+                posicion[1]=niv
+        return posicion
