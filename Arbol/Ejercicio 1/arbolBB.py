@@ -149,23 +149,21 @@ class arbolBB:
             print("Arbol Vacio")
         else:
             return self.__altura
-    def InOrden(self):
-        self.recursiva(self.__raiz.obtenerIzquierdo())
-        print(self.__raiz.getItem())
-        self.recursiva(self.__raiz.obtenerDerecho())
-    def PrePorden(self):
-        print(self.__raiz.getItem())
-        self.recursiva(self.__raiz.obtenerIzquierdo())
-        self.recursiva(self.__raiz.obtenerDerecho())
-    def PostOrden(self):
-        self.recursiva(self.__raiz.obtenerIzquierdo())
-        self.recursiva(self.__raiz.obtenerDerecho())
-        print(self.__raiz.getItem())
-    def recursiva(self, nodo):
-        if (nodo != None):
-            self.recursiva(nodo.obtenerIzquierdo())
-            print(nodo.getItem())
-            self.recursiva(nodo.obtenerDerecho())
+    def InOrden(self, raiz):
+        if raiz != None:
+            self.InOrden(raiz.obtenerIzquierdo())
+            print(raiz.getItem())
+            self.InOrden(raiz.obtenerDerecho())
+    def PreOrden(self, raiz):
+        if raiz != None:
+            print(raiz.getItem())
+            self.PreOrden(raiz.obtenerIzquierdo())
+            self.PreOrden(raiz.obtenerDerecho())
+    def PostOrden(self, raiz):
+        if raiz != None:
+            self.PostOrden(raiz.obtenerIzquierdo())
+            self.PostOrden(raiz.obtenerDerecho())
+            print(raiz.getItem())
     def posicion(self, x, niv=0):
         if not self.vacio():
             posicion = [None, None]
