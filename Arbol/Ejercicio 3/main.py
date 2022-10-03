@@ -9,7 +9,13 @@ if __name__ == '__main__':
     arbol.insertar(15)
     arbol.insertar(5)
     arbol.insertar(10)
-    arbol.insertar(3)
+    hijo = int(input("Ingrese Nodo Hijo: "))
+    padre = int(input("Ingrese segundo nodo para verificar si es padre del primer nodo: "))
+    arbol.padre(padre,hijo)
     print("Altura del arbol: ", arbol.altura())
     print("Cantidad de Nodos en el arbol: ", arbol.contador())
+    suces = int(input("Ingrese nodo para mostrar sucesores: "))
+    arbol.sucesores(suces)
     
+
+

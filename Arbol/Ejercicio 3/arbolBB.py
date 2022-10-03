@@ -104,10 +104,16 @@ class arbolBB:
         if celda.getItem() == z:
             izq = celda.obtenerIzquierdo()
             if izq != None and izq.getItem() == x:
+                print("El Padre es {}".format(celda.getItem()))
+                i=celda.obtenerDerecho()
+                print("El hermano es {}".format(i.getItem()))
                 band = True
             else:
                 der = celda.obtenerDerecho()
                 if der != None and der.getItem() == x:
+                    print("El padre es {}".format(celda.getItem()))
+                    i=celda.obtenerIzquierdo()
+                    print("El hermano es {}".format(i.getItem()))
                     band = True
         else:
             print("ERROR")
@@ -166,6 +172,10 @@ class arbolBB:
             self.PostOrden(raiz.obtenerIzquierdo())
             self.PostOrden(raiz.obtenerDerecho())
             print(raiz.getItem())
+    def sucesores(self, nodo):
+        elemento = self.posicion(nodo)[0]
+        if elemento.getItem() == nodo:
+            self.PreOrden(elemento)
     def posicion(self, x, niv=0):
         if not self.vacio():
             posicion = [None, None]
