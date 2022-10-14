@@ -104,19 +104,21 @@ class arbolBB:
         if celda.getItem() == z:
             izq = celda.obtenerIzquierdo()
             if izq != None and izq.getItem() == x:
-                print("El Padre es {}".format(celda.getItem()))
+                print("El Padre de {} es {}".format(x, celda.getItem()))
                 i=celda.obtenerDerecho()
-                print("El hermano es {}".format(i.getItem()))
+                print("El hermano de {} es {}".format(x, i.getItem()))
                 band = True
             else:
                 der = celda.obtenerDerecho()
                 if der != None and der.getItem() == x:
-                    print("El padre es {}".format(celda.getItem()))
+                    print("El padre de {} es {}".format(x, celda.getItem()))
                     i=celda.obtenerIzquierdo()
-                    print("El hermano es {}".format(i.getItem()))
+                    print("El hermano de {} es {}".format(x, i.getItem()))
                     band = True
+                else:
+                    print("{} no es hijo de {}".format(x, z))
         else:
-            print("ERROR")
+            print("No se encontro nodo Padre")
         return band
     def camino(self, x, z):
         lista = []
