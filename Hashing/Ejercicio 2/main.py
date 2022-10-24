@@ -1,19 +1,35 @@
-import random
-from Hashing import DirecAbierto
+import random as rand
+from hash import tablaHash
 
 if __name__ == '__main__':
-    tabla = DirecAbierto()
-    pseudoRand = tabla.GenerarPseudoRandom()
-    numeroClaves = 8.4
-    tabla.crear(numeroClaves)
-    tamanio = tabla.CalcularTamanioTabla(numeroClaves)
-    print("-_________________________________-")
-    '''for i in range(numeroClaves):
-        clave = int(random.uniform(0, 1000))
-        tabla.insertar(clave, pseudoRand, tamanio)
-    clv = int(input("Ingresar para buscar: "))
-    busq = tabla.buscar(clv, tamanio)
-    if busq == -1:
-        print("No se encontro la clave")
-    else:
-        print("Se encontro la clave {}".format(clv))'''
+    cant = int(input('Ingrese la cantidad de claves: '))
+    tabla = tablaHash(cant)
+    pseudoRand = tabla.GeneraPseudoRandom()
+    for i in range(cant):
+        clave = rand.randint(0, 2000)
+        print(clave)
+        tabla.insertar(clave, pseudoRand)
+    tabla.mostrar()
+    clave = int(input('Clave a insertar: '))
+    valor = tabla.insertar(clave, pseudoRand)
+    if(valor == 0):
+        print('ERROR: la clave ya esta en la tabla')
+    elif(valor == 1):
+        print('DATO: la clave se inserto en la tabla')
+    elif(valor == 2):
+        print('DATO: la clave se inserto en otro lugar en la tabla')
+    elif(valor == 3):
+        print('ERROR: la tabla esta llena')
+    tabla.mostrar()
+    clave = int(input('Clave a buscar (-1 para salir): '))
+    while clave != -1:
+        valor = tabla.buscar(clave, pseudoRand)
+        if(valor == 0):
+            print('DATO: la clave esta en la tabla')
+        elif(valor == 1):
+            print('ERROR: la clave no esta en la tabla')
+        elif(valor == 2):
+            print('DATO: la clave se inserto en otro lugar en la tabla')
+        elif(valor == 3):
+            print('ERROR: la tabla esta llena y no esta la clave')
+        clave = int(input('Clave a buscar: '))
