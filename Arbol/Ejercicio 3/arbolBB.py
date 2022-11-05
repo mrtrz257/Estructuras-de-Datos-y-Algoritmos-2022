@@ -2,11 +2,9 @@ from nodo import nodo
 
 class arbolBB:
     __raiz = None
-    __altura = None
     __cantidad = None
     def __init__(self):
         self.__raiz = None
-        self.__altura = 0
         self.__cantidad = 0
     def vacio(self):
         return self.__raiz == None
@@ -23,12 +21,8 @@ class arbolBB:
                 celda = nodo(x)
                 clave = aux[0].getItem()
                 if clave > x:
-                    if aux[1]+1 > self.__altura:
-                        self.__altura = aux[1]+1
                     aux[0].cargarIzquierdo(celda)
                 elif clave < x:
-                    if aux[1]+1 > self.__altura:
-                        self.__altura = aux[1]+1
                     aux[0].cargarDerecho(celda)
             else:
                 print("ERROR")
@@ -158,7 +152,19 @@ class arbolBB:
         if self.vacio():
             print("Arbol Vacio")
         else:
-            return self.__altura
+            aux = self.__raiz
+            return self.calcAltura(aux, 0, 0)
+    def calcAltura(self, nodo, altura, max):
+        if (nodo != None):
+            dato = self.calcAltura(nodo.obtenerIzquierdo(), altura + 1, max)
+            if (altura > max):
+                max = altura
+            if (dato > max):
+                max = dato
+            dato = self.calcAltura(nodo.obtenerDerecho(), altura + 1, max)
+            if (dato > max):
+                max = dato
+        return max
     def InOrden(self, raiz):
         if raiz != None:
             self.InOrden(raiz.obtenerIzquierdo())
